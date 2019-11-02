@@ -1,0 +1,8 @@
+prefix=/home/james/polardrone/devel/.private/packages
+
+Name: packages
+Description: Description of packages
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/james/polardrone/devel/.private/packages/lib 
+Requires: 

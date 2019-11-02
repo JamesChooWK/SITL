@@ -1,0 +1,6 @@
+devel_space: /home/james/polardrone/devel
+install: false
+install_space: /home/james/polardrone/install
+profile: default
+source_space: /home/james/polardrone/src
+workspace: /home/james/polardrone

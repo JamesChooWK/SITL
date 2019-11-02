@@ -1,0 +1,12 @@
+Symlinking /home/james/polardrone/devel/./cmake.lock
+Symlinking /home/james/polardrone/devel/./_setup_util.py
+Symlinking /home/james/polardrone/devel/./setup.zsh
+Symlinking /home/james/polardrone/devel/./local_setup.zsh
+Symlinking /home/james/polardrone/devel/./local_setup.bash
+Symlinking /home/james/polardrone/devel/./env.sh
+Symlinking /home/james/polardrone/devel/./setup.bash
+Symlinking /home/james/polardrone/devel/./local_setup.sh
+Symlinking /home/james/polardrone/devel/./setup.sh
+Symlinking /home/james/polardrone/devel/share/catkin_tools_prebuild/cmake/catkin_tools_prebuildConfig-version.cmake
+Symlinking /home/james/polardrone/devel/share/catkin_tools_prebuild/cmake/catkin_tools_prebuildConfig.cmake
+Symlinking /home/james/polardrone/devel/lib/pkgconfig/catkin_tools_prebuild.pc

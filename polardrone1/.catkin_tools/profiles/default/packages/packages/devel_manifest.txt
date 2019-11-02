@@ -1,0 +1,5 @@
+packages
+/home/james/polardrone/devel/.private/packages/cmake.lock /home/james/polardrone/devel/./cmake.lock
+/home/james/polardrone/devel/.private/packages/share/packages/cmake/packagesConfig-version.cmake /home/james/polardrone/devel/share/packages/cmake/packagesConfig-version.cmake
+/home/james/polardrone/devel/.private/packages/share/packages/cmake/packagesConfig.cmake /home/james/polardrone/devel/share/packages/cmake/packagesConfig.cmake
+/home/james/polardrone/devel/.private/packages/lib/pkgconfig/packages.pc /home/james/polardrone/devel/lib/pkgconfig/packages.pc
