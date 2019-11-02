@@ -17,6 +17,7 @@ from threading import Thread
 from mavros_msgs.msg import Waypoint    # define waypoints
 from sensor_msgs.msg import NavSatFix   # [lat,long,alt]
 from mavros_msgs.msg import WaypointList # Waypoints
+from mavros_msgs.msg import WaypointReached # Current Waypoints
 from mavros_msgs.srv import CommandHome # Return home
 from mavros_msgs.srv import CommandBool # arming
 from mavros_msgs.srv import SetMode     # setMode
@@ -29,7 +30,7 @@ from std_msgs.msg import Float64
 
 class UAV():
     def __init__ (self):
-        self.counter =0
+        self.cur_pt =0
 
     def getPosition(self, data):
         self.position = [data.latitude, data.longitude, data.altitude] # [degree, degree, degree]
@@ -57,13 +58,19 @@ class UAV():
 
 
 
+
+
 class GNC(object):
     """docstring for GNC."""
 
     def __init__(self):
         super(GNC, self).__init__()
-        self.counter = 0
+        self.cur_pt = 0
 
+    def current_waypoint(self, data):
+        self.cur_pt = data.wp_seq
+        # print("The sqe is: ", seq)
+        return self.cur_pt
 
 
     def setFlightMode(self,mode):
@@ -189,7 +196,7 @@ class GNC(object):
         # Fifth Waypoint
         wp5 = Waypoint()
         wp5.frame = 3
-        wp5.command = 22
+        wp5.command = 16
         wp5.is_current = False
         wp5.autocontinue = True
         wp5.param1 = 0
@@ -198,10 +205,40 @@ class GNC(object):
         wp5.param4 = float('nan')
         wp5.x_lat = 2.909197
         wp5.y_long = 101.655167
-        wp5.z_alt = 25
+        wp5.z_alt = 10
         wplist.append(wp5)
-        print(wplist)
+
+        # Sixth Waypoint
+        wp6 = Waypoint()
+        wp6.frame = 3
+        wp6.command = 16
+        wp6.is_current = False
+        wp6.autocontinue = True
+        wp6.param1 = 0
+        wp6.param2 = 0
+        wp6.param3 = 0 # radius to consider passing through waypoint
+        wp6.param4 = float('nan')
+        wp6.x_lat = 2.909406
+        wp6.y_long = 101.655142
+        wp6.z_alt = 5
+        wplist.append(wp6)
+
+        # seven WP
+        wp7 = Waypoint()
+        wp7.frame = 3
+        wp7.command = 16
+        wp7.is_current = False
+        wp7.autocontinue = True
+        wp7.param1 = 0
+        wp7.param2 = 0
+        wp7.param3 = 0 # radius to consider passing through waypoint
+        wp7.param4 = float('nan')
+        wp7.x_lat = 2.909368
+        wp7.y_long = 101.655304
+        wp7.z_alt = 5
+        wplist.append(wp7)
         self.setWayPoint(0, wplist)
+
 
     def clear_wayPoint(self):
         print('Clear Waypoint \n')
@@ -239,12 +276,11 @@ class GNC(object):
 
 class UAV_Node():
     uav = UAV()
-
     uav.setHomeLocation([2.909368, 101.655304, 47.15991831094613]) # Return to Home
 
     # Initiate this GNC Node
-    rospy.init_node('GNC_Node', anonymous=True)
-    rospy.loginfo('Initialised GNC Node')
+    rospy.init_node('UAV_Node', anonymous=True)
+    rospy.loginfo('Initialised UAV Node')
 
     # Initiate subscription to the GPS location topic
     rospy.Subscriber("/mavros/global_position/global", NavSatFix, uav.getPosition)
@@ -256,21 +292,45 @@ class UAV_Node():
 
 
 
+    # rospy.spin()
+    # rate = rospy.Rate(5) #Hz
+
 
 class GNC_Node():
+
+    # Initiate this GNC Node
+    # rospy.init_node('GNC_Node', anonymous=True)
+    # rospy.loginfo('Initialised GNC Node')
+
     print("GNC_node initialising")
     gnc = GNC()
+
+    rospy.Subscriber("/mavros/mission/reached", WaypointReached, gnc.current_waypoint)
+    rospy.loginfo(" Initialised Subscribing to mavros/mission/reached ")
+
     gnc.clear_wayPoint()
 
     rospy.sleep(2)
     gnc.waypt()
 
-    print("Arming")
+    print("Trying to Arm")
     rospy.sleep(10)
     gnc.arming()
 
     rospy.sleep(2)
     gnc.setFlightMode('AUTO.MISSION')
+
+
+    Flag = False
+    seq = 0
+    while Flag == False:
+        seq = gnc.cur_pt
+        if seq == 7:
+            Flag = True
+            gnc.setFlightMode('AUTO.LAND')
+            print(seq)
+        # print("Flag is False")
+
 
 
 
@@ -280,5 +340,5 @@ if __name__ == '__main__':
 
     x = Thread(target = GNC, args=())
     x.start()
+    UAV_Node()
     x.join()
-    # UAV_Node()
