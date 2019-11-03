@@ -18,4 +18,6 @@ QGC: v3.5.5
 
 ## Autopilot type and version
 - [ ] Ardupilot
-- [X] PX4
+- [X] [PX4](https://github.com/PX4/Firmware.git) - Autopilot for SITL.
+
+
