@@ -52,3 +52,10 @@ cd ~/SITL/polardrone/src/packages/script
 python GNC.py
 ```
 
+Set up for the QGC communication:
+
+An communication link has to be add to the QGC inorder to autometically connect with the simulation.
+```
+Connection Type : UDP
+Port Number: 14550
+```
