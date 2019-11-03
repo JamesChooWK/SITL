@@ -1,6 +1,6 @@
 # SITL
 This is the assigned task for UAV software Engineer Task (SITL). The link to the doc of the task can be found in the link below. The main objective is to perform Software In The Loop (SITL) simulation. Example and steps are shown in the doc, however there are shown using Mission Planer and dronekit.
-This repo contains script for SITL, however instead of using MP + dronekit, ROS, MAVROS and QGC are used.
+This repo contains script for SITL using ROS, MAVROS and QGC.
 
 * [LINK](https://docs.google.com/document/d/1pH_aj5hL5RaRzuzeWXZFK4SGmJOqAFgBG_7zk75i9Tk/edit) - Document for the task.
 
