@@ -20,4 +20,27 @@ QGC: v3.5.5
 - [ ] Ardupilot
 - [X] [PX4](https://github.com/PX4/Firmware.git) - Autopilot for SITL.
 
+# Steps
+4 terminial is required to run the SITL.
+First terminal:
+```python
+roscore
+```
+Second terminal:
+```
+roslaunch mavros px4.launch 
+```
+Thrid terminal:
+```
+cd ~/src/Firmware
+export PX4_HOME_LAT=2.909368
+export PX4_HOME_LON=101.655304
+export PX4_HOME_ALT=28.5
+make px4_sitl gazebo_solo
+```
+Fourth terminal:
+```
+cd ~/SITL/polardrone/src/packages/script
+python GNC.py
+```
 
