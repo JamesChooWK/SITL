@@ -233,8 +233,8 @@ class GNC(object):
         wp7.param2 = 0
         wp7.param3 = 0 # radius to consider passing through waypoint
         wp7.param4 = float('nan')
-        wp7.x_lat = 2.909368
-        wp7.y_long = 101.655304
+        wp7.x_lat = 2.909520
+        wp7.y_long = 101.655192
         wp7.z_alt = 5
         wplist.append(wp7)
         self.setWayPoint(0, wplist)
@@ -327,7 +327,7 @@ class GNC_Node():
         seq = gnc.cur_pt
         if seq == 7:
             Flag = True
-            gnc.setFlightMode('AUTO.LAND')
+            gnc.setFlightMode('AUTO.RTL')
             print(seq)
         # print("Flag is False")
 
